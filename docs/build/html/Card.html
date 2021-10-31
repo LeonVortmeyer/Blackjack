@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Card module &mdash; Blackjack 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Blackjack
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Card module</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Blackjack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Card module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Card">
+<span id="card-module"></span><h1>Card module<a class="headerlink" href="#module-Card" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Card.Card">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">Card.</span></span><span class="sig-name descname"><span class="pre">Card</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">card_string</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Card.html#Card"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Card.Card" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Card implements card value logic and improves upon card string representation from the base 
+string inputs like ‘A-H’, ‘10-C’, etc</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>card_string</strong> (<em>String</em>) – the card specification from the suits and values defined in suits and values lists</p>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a card instance from the card_string</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>:class`Card`</p>
+</dd>
+</dl>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Card.Card.suit_names">
+<span class="sig-name descname"><span class="pre">suit_names</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'C':</span> <span class="pre">'Clubs',</span> <span class="pre">'D':</span> <span class="pre">'Diamonds',</span> <span class="pre">'H':</span> <span class="pre">'Hearts',</span> <span class="pre">'S':</span> <span class="pre">'Spades'}</span></em><a class="headerlink" href="#Card.Card.suit_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Card.Card.suits">
+<span class="sig-name descname"><span class="pre">suits</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['S',</span> <span class="pre">'H',</span> <span class="pre">'D',</span> <span class="pre">'C']</span></em><a class="headerlink" href="#Card.Card.suits" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Card.Card.value_map">
+<span class="sig-name descname"><span class="pre">value_map</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'10':</span> <span class="pre">10,</span> <span class="pre">'2':</span> <span class="pre">2,</span> <span class="pre">'3':</span> <span class="pre">3,</span> <span class="pre">'4':</span> <span class="pre">4,</span> <span class="pre">'5':</span> <span class="pre">5,</span> <span class="pre">'6':</span> <span class="pre">6,</span> <span class="pre">'7':</span> <span class="pre">7,</span> <span class="pre">'8':</span> <span class="pre">8,</span> <span class="pre">'9':</span> <span class="pre">9,</span> <span class="pre">'A':</span> <span class="pre">{'high':</span> <span class="pre">11,</span> <span class="pre">'low':</span> <span class="pre">1},</span> <span class="pre">'J':</span> <span class="pre">10,</span> <span class="pre">'K':</span> <span class="pre">10,</span> <span class="pre">'Q':</span> <span class="pre">10}</span></em><a class="headerlink" href="#Card.Card.value_map" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Card.Card.value_names">
+<span class="sig-name descname"><span class="pre">value_names</span></span><em class="property"> <span class="pre">=</span> <span class="pre">{'10':</span> <span class="pre">'Ten',</span> <span class="pre">'2':</span> <span class="pre">'Two',</span> <span class="pre">'3':</span> <span class="pre">'Three',</span> <span class="pre">'4':</span> <span class="pre">'Four',</span> <span class="pre">'5':</span> <span class="pre">'Five',</span> <span class="pre">'6':</span> <span class="pre">'Six',</span> <span class="pre">'7':</span> <span class="pre">'Seven',</span> <span class="pre">'8':</span> <span class="pre">'Eight',</span> <span class="pre">'9':</span> <span class="pre">'Nine',</span> <span class="pre">'A':</span> <span class="pre">'Ace',</span> <span class="pre">'J':</span> <span class="pre">'Jack',</span> <span class="pre">'K':</span> <span class="pre">'King',</span> <span class="pre">'Q':</span> <span class="pre">'Queen'}</span></em><a class="headerlink" href="#Card.Card.value_names" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Card.Card.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['A',</span> <span class="pre">'2',</span> <span class="pre">'3',</span> <span class="pre">'4',</span> <span class="pre">'5',</span> <span class="pre">'6',</span> <span class="pre">'7',</span> <span class="pre">'8',</span> <span class="pre">'9',</span> <span class="pre">'10',</span> <span class="pre">'J',</span> <span class="pre">'Q',</span> <span class="pre">'K']</span></em><a class="headerlink" href="#Card.Card.values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Leon Vortmeyer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

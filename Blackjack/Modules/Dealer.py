@@ -1,26 +1,31 @@
 #Leon Vortmeyer 10.31.2021
 
-from Modules.Player import Player
+from Player import Player
 
 class Dealer(Player):
+    """The Dealer class inherits from the class:`Player` abstract base class.
+    
+    :return: Returns a new instance of the Dealer
+    :rtype: :class`Dealer`
+    """
     
     def __init__(self):
         super().__init__(0, "Dealer")
         self.type = 'Dealer'
 
-    def play_round(self, Game): 
-        while self.hand.score < 17:
-            if len(Game.cards) == 0:
-                Game.new_deck()
-            card = Game.cards.pop(0)
-            print(f"Dealer hits and receives {card}\n")
-            self.hit(card)
-            
-        if self.hand.score <= 21:
-            print(f"The Dealer has {self.hand.score} and now stands.\n")
-        else:
-            self.bust = True
-            print(f"The Dealer has {self.hand.score} and busts.\n")
+
+    def think(self):
+        """
+        Think is called on an instance of Dealer and abstracts the Dealer logic to be used in play_round.
+        The Dealer logic is forced to hit so long as the hand score is less than or equal to 17.
+
+        :return: `True` if Dealer hits, `False` if Dealer stands
+        :rtype: : boolean
+        """
+        while self.hand.score <= 17:
+            return True 
+        return False
+
 
 
 

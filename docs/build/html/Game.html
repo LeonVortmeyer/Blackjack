@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" /><meta name="generator" content="Docutils 0.17: http://docutils.sourceforge.net/" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game module &mdash; Blackjack 1.0 documentation</title>
+      <link rel="stylesheet" href="_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="./" id="documentation_options" src="_static/documentation_options.js"></script>
+        <script src="_static/jquery.js"></script>
+        <script src="_static/underscore.js"></script>
+        <script src="_static/doctools.js"></script>
+    <script src="_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="genindex.html" />
+    <link rel="search" title="Search" href="search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="index.html" class="icon icon-home"> Blackjack
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"><ul>
+<li><a class="reference internal" href="#">Game module</a></li>
+</ul>
+</div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="index.html">Blackjack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="index.html" class="icon icon-home"></a> &raquo;</li>
+      <li>Game module</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <section id="module-Game">
+<span id="game-module"></span><h1>Game module<a class="headerlink" href="#module-Game" title="Permalink to this headline"></a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="Game.Game">
+<em class="property"><span class="pre">class</span> </em><span class="sig-prename descclassname"><span class="pre">Game.</span></span><span class="sig-name descname"><span class="pre">Game</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">human_player_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">computer_player_count</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game" title="Permalink to this definition"></a></dt>
+<dd><p>Bases: <code class="xref py py-class docutils literal notranslate"><span class="pre">object</span></code></p>
+<p>The Game class houses the highest level attributes and methods required to play a terminal-based game of blackjack</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>human_player_count</strong> (<em>Integer</em>) – the number of human players with which to instantiate the game, defaults to 1</p></li>
+<li><p><strong>computer_player_count</strong> (<em>Integer</em>) – the number of human players with which to instantiate the game, defaults to 1</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns</dt>
+<dd class="field-even"><p>Returns a new instance of the game class with an unshuffled deck and empty leaderboard</p>
+</dd>
+<dt class="field-odd">Return type</dt>
+<dd class="field-odd"><p>:class`Game`</p>
+</dd>
+</dl>
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.deal">
+<span class="sig-name descname"><span class="pre">deal</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.deal"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.deal" title="Permalink to this definition"></a></dt>
+<dd><p>The deal method is called at the start of the game and sends 2 cards to each player in the game.</p>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Game.dealer">
+<span class="sig-name descname"><span class="pre">dealer</span></span><em class="property"> <span class="pre">=</span> <span class="pre">&lt;Dealer.Dealer</span> <span class="pre">object&gt;</span></em><a class="headerlink" href="#Game.Game.dealer" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.declare_winner">
+<span class="sig-name descname"><span class="pre">declare_winner</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.declare_winner"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.declare_winner" title="Permalink to this definition"></a></dt>
+<dd><p>An instance method called at the end of every round that determines the winner and updates the class:<cite>Leaderboard</cite> attribute.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.give_info_to_player">
+<span class="sig-name descname"><span class="pre">give_info_to_player</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">player</span></span></em><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.give_info_to_player"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.give_info_to_player" title="Permalink to this definition"></a></dt>
+<dd><p>An instance method called at the beginning of every player’s turn to provide the player with necessary game info:
+their hand and the hands of their competitors.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters</dt>
+<dd class="field-odd"><p><strong>player</strong> (class:<cite>player</cite>) – the player whose current turn it is</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.list_all_players">
+<span class="sig-name descname"><span class="pre">list_all_players</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.list_all_players"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.list_all_players" title="Permalink to this definition"></a></dt>
+<dd><p>Returns a list of all players in the game instance
+:return: A list of all players in the game instance
+:rtype: List[class:<cite>Player</cite>]</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.new_deck">
+<span class="sig-name descname"><span class="pre">new_deck</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.new_deck"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.new_deck" title="Permalink to this definition"></a></dt>
+<dd><p>The new_deck is an instance method that takes no parameters, but resets the game’s self.cards attribute to a new shuffled deck.
+The method is called should the game’s deck reach a length of 0.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.play">
+<span class="sig-name descname"><span class="pre">play</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.play"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.play" title="Permalink to this definition"></a></dt>
+<dd><p>The play method is called in the executable file blackjack.py. It shuffles the deck, and deals cards, then has 
+every player play their round before declaring a winner and printing the current leaderboard standings. 
+The method then prompts the admin human user if they would like to play another round.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.reset_game">
+<span class="sig-name descname"><span class="pre">reset_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.reset_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.reset_game" title="Permalink to this definition"></a></dt>
+<dd><p>An instance method called at the end of every round that takes all player cards and sets up a fresh deck.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.shuffle">
+<span class="sig-name descname"><span class="pre">shuffle</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.shuffle"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.shuffle" title="Permalink to this definition"></a></dt>
+<dd><p>Shuffles the game instance cards, and places the shuffled deck in the self.cards attribute</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.start_game">
+<em class="property"><span class="pre">classmethod</span> </em><span class="sig-name descname"><span class="pre">start_game</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.start_game"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.start_game" title="Permalink to this definition"></a></dt>
+<dd><p>A command-line friendly game constructing class method that allows users to specify and name their human
+and computer based players when initializing a new game. An alternative to calling the Game() initialization method.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a new instance of the game class with an unshuffled deck and empty leaderboard</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>:class`Game`</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Game.suits">
+<span class="sig-name descname"><span class="pre">suits</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['S',</span> <span class="pre">'H',</span> <span class="pre">'D',</span> <span class="pre">'C']</span></em><a class="headerlink" href="#Game.Game.suits" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="Game.Game.values">
+<span class="sig-name descname"><span class="pre">values</span></span><em class="property"> <span class="pre">=</span> <span class="pre">['A',</span> <span class="pre">'2',</span> <span class="pre">'3',</span> <span class="pre">'4',</span> <span class="pre">'5',</span> <span class="pre">'6',</span> <span class="pre">'7',</span> <span class="pre">'8',</span> <span class="pre">'9',</span> <span class="pre">'10',</span> <span class="pre">'J',</span> <span class="pre">'Q',</span> <span class="pre">'K']</span></em><a class="headerlink" href="#Game.Game.values" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
+
+</dd></dl>
+
+</section>
+
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Leon Vortmeyer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

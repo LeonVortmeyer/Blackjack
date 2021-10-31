@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Game &mdash; Blackjack 1.0 documentation</title>
+      <link rel="stylesheet" href="../_static/pygments.css" type="text/css" />
+      <link rel="stylesheet" href="../_static/css/theme.css" type="text/css" />
+  <!--[if lt IE 9]>
+    <script src="../_static/js/html5shiv.min.js"></script>
+  <![endif]-->
+  
+        <script data-url_root="../" id="documentation_options" src="../_static/documentation_options.js"></script>
+        <script src="../_static/jquery.js"></script>
+        <script src="../_static/underscore.js"></script>
+        <script src="../_static/doctools.js"></script>
+    <script src="../_static/js/theme.js"></script>
+    <link rel="index" title="Index" href="../genindex.html" />
+    <link rel="search" title="Search" href="../search.html" /> 
+</head>
+
+<body class="wy-body-for-nav"> 
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search" >
+            <a href="../index.html" class="icon icon-home"> Blackjack
+          </a>
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="../search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+        </div><div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <!-- Local TOC -->
+              <div class="local-toc"></div>
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap"><nav class="wy-nav-top" aria-label="Mobile navigation menu" >
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="../index.html">Blackjack</a>
+      </nav>
+
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          <div role="navigation" aria-label="Page navigation">
+  <ul class="wy-breadcrumbs">
+      <li><a href="../index.html" class="icon icon-home"></a> &raquo;</li>
+          <li><a href="index.html">Module code</a> &raquo;</li>
+      <li>Game</li>
+      <li class="wy-breadcrumbs-aside">
+      </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+             
+  <h1>Source code for Game</h1><div class="highlight"><pre>
+<span></span><span class="c1">#Leon Vortmeyer 10.31.2021</span>
+
+<span class="kn">from</span> <span class="nn">Card</span> <span class="kn">import</span> <span class="n">Card</span>
+<span class="kn">from</span> <span class="nn">Computer</span> <span class="kn">import</span> <span class="n">Computer</span>
+<span class="kn">from</span> <span class="nn">Dealer</span> <span class="kn">import</span> <span class="n">Dealer</span>
+<span class="kn">from</span> <span class="nn">Human</span> <span class="kn">import</span> <span class="n">Human</span>
+<span class="kn">from</span> <span class="nn">Leaderboard</span> <span class="kn">import</span> <span class="n">Leaderboard</span>
+<span class="kn">from</span> <span class="nn">random</span> <span class="kn">import</span> <span class="n">randint</span>
+
+
+<div class="viewcode-block" id="Game"><a class="viewcode-back" href="../Game.html#Game.Game">[docs]</a><span class="k">class</span> <span class="nc">Game</span><span class="p">:</span>
+    <span class="sd">&quot;&quot;&quot;The Game class houses the highest level attributes and methods required to play a terminal-based game of blackjack</span>
+
+<span class="sd">    :param human_player_count: the number of human players with which to instantiate the game, defaults to 1</span>
+<span class="sd">    :type human_player_count: Integer</span>
+<span class="sd">    :param computer_player_count: the number of human players with which to instantiate the game, defaults to 1</span>
+<span class="sd">    :type computer_player_count: Integer</span>
+<span class="sd">    </span>
+<span class="sd">    :return: Returns a new instance of the game class with an unshuffled deck and empty leaderboard</span>
+<span class="sd">    :rtype: :class`Game`</span>
+<span class="sd">    &quot;&quot;&quot;</span>
+
+    <span class="n">suits</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;S&quot;</span><span class="p">,</span> <span class="s2">&quot;H&quot;</span><span class="p">,</span> <span class="s2">&quot;D&quot;</span><span class="p">,</span> <span class="s2">&quot;C&quot;</span><span class="p">]</span>
+    <span class="n">values</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;A&quot;</span><span class="p">,</span> <span class="s2">&quot;2&quot;</span><span class="p">,</span> <span class="s2">&quot;3&quot;</span><span class="p">,</span> <span class="s2">&quot;4&quot;</span><span class="p">,</span> <span class="s2">&quot;5&quot;</span><span class="p">,</span> <span class="s2">&quot;6&quot;</span><span class="p">,</span> <span class="s2">&quot;7&quot;</span><span class="p">,</span> <span class="s2">&quot;8&quot;</span><span class="p">,</span> <span class="s2">&quot;9&quot;</span><span class="p">,</span> <span class="s2">&quot;10&quot;</span><span class="p">,</span> <span class="s2">&quot;J&quot;</span><span class="p">,</span> <span class="s2">&quot;Q&quot;</span><span class="p">,</span> <span class="s2">&quot;K&quot;</span><span class="p">]</span>
+    <span class="n">dealer</span> <span class="o">=</span> <span class="n">Dealer</span><span class="p">()</span> <span class="c1">#Instantiates the dealer</span>
+
+    <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">human_player_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">computer_player_count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">]</span> <span class="c1">#creates an unshuffled deck</span>
+        
+        <span class="n">human_players</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">human_player_count</span><span class="p">):</span>
+            <span class="n">name</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">Name of human player </span><span class="si">{</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="si">}</span><span class="s2">:</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">)</span> <span class="c1">#get human player names</span>
+            <span class="n">human_players</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Human</span><span class="p">(</span><span class="n">i</span><span class="o">+</span><span class="mi">1</span><span class="p">,</span> <span class="n">name</span><span class="p">))</span>
+        
+        <span class="n">computer_players</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">computer_player_count</span><span class="p">):</span>
+            <span class="n">computer_players</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">Computer</span><span class="p">(</span><span class="n">i</span><span class="p">))</span>
+        
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">human_players</span> <span class="o">=</span> <span class="n">human_players</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">computer_players</span> <span class="o">=</span> <span class="n">computer_players</span> 
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span> <span class="o">=</span> <span class="n">Leaderboard</span><span class="p">(</span><span class="n">human_players</span> <span class="o">+</span> <span class="n">computer_players</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dealer</span><span class="p">])</span> <span class="c1">#create leaderboard</span>
+    
+
+<div class="viewcode-block" id="Game.start_game"><a class="viewcode-back" href="../Game.html#Game.Game.start_game">[docs]</a>    <span class="nd">@classmethod</span>
+    <span class="k">def</span> <span class="nf">start_game</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;A command-line friendly game constructing class method that allows users to specify and name their human</span>
+<span class="sd">        and computer based players when initializing a new game. An alternative to calling the Game() initialization method.</span>
+
+<span class="sd">        :return: Returns a new instance of the game class with an unshuffled deck and empty leaderboard</span>
+<span class="sd">        :rtype: :class`Game`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗░░░░░██╗░█████╗░░█████╗░██╗░░██╗</span>
+<span class="s2">██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝░░░░░██║██╔══██╗██╔══██╗██║░██╔╝</span>
+<span class="s2">██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░░░░░░██║███████║██║░░╚═╝█████═╝░</span>
+<span class="s2">██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░██╗░░██║██╔══██║██║░░██╗██╔═██╗░</span>
+<span class="s2">██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗╚█████╔╝██║░░██║╚█████╔╝██║░╚██╗</span>
+<span class="s2">╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝&quot;&quot;&quot;</span><span class="p">)</span>
+
+        <span class="c1">#Word art sourced from https://fsymbols.com/text-art/</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">Welcome to terminal Blackjack! In just a moment you&#39;ll be on your way.</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        Before we start the game, we&#39;ll need to know how many people are playing...</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        Let us know the number of human players you have (1 to 5) and computer players you&#39;d like to play with (1 to 5)!</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">human_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;How many human players?</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">))</span> <span class="c1">#Prompt user for human players</span>
+                <span class="k">if</span> <span class="n">human_count</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span> <span class="c1">#Game must have between 1 and 5 human players</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There can only be 1 to 5 human players in the game</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span> <span class="c1">#Integer not provided</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There must be an interger value of human players from 1 to 5</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="k">try</span><span class="p">:</span>
+                <span class="n">computer_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">How many computer players? </span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">))</span>
+                <span class="k">if</span> <span class="n">computer_count</span> <span class="ow">in</span> <span class="nb">list</span><span class="p">(</span><span class="nb">range</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">6</span><span class="p">)):</span> <span class="c1">#Game must have between 1 and 5 computer players</span>
+                    <span class="k">break</span>
+                <span class="k">else</span><span class="p">:</span>
+                        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There can only be 1 to 5 computer players in the game</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">except</span> <span class="ne">ValueError</span><span class="p">:</span> <span class="c1">#Integer not provided</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;There must be an interger value of computer players from 1 to 5</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+        
+        <span class="n">game</span> <span class="o">=</span> <span class="bp">cls</span><span class="p">(</span><span class="n">human_count</span><span class="p">,</span> <span class="n">computer_count</span><span class="p">)</span> <span class="c1">#intantiate game from user input</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2"> --- Your game has been constructed! Get ready to play! --- </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">return</span> <span class="n">game</span></div>
+
+<div class="viewcode-block" id="Game.list_all_players"><a class="viewcode-back" href="../Game.html#Game.Game.list_all_players">[docs]</a>    <span class="k">def</span> <span class="nf">list_all_players</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Returns a list of all players in the game instance</span>
+<span class="sd">        :return: A list of all players in the game instance</span>
+<span class="sd">        :rtype: List[class:`Player`]</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="k">return</span> <span class="bp">self</span><span class="o">.</span><span class="n">human_players</span> <span class="o">+</span> <span class="bp">self</span><span class="o">.</span><span class="n">computer_players</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dealer</span><span class="p">]</span></div>
+
+<div class="viewcode-block" id="Game.shuffle"><a class="viewcode-back" href="../Game.html#Game.Game.shuffle">[docs]</a>    <span class="k">def</span> <span class="nf">shuffle</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;Shuffles the game instance cards, and places the shuffled deck in the self.cards attribute</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">cards_copy</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[]</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="nb">len</span><span class="p">(</span><span class="n">cards_copy</span><span class="p">)):</span>
+            <span class="n">index</span> <span class="o">=</span> <span class="n">randint</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="nb">len</span><span class="p">(</span><span class="n">cards_copy</span><span class="p">))</span> <span class="o">-</span> <span class="mi">1</span>
+            <span class="n">shuffled_card</span> <span class="o">=</span> <span class="n">cards_copy</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="n">index</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">shuffled_card</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Game.new_deck"><a class="viewcode-back" href="../Game.html#Game.Game.new_deck">[docs]</a>    <span class="k">def</span> <span class="nf">new_deck</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The new_deck is an instance method that takes no parameters, but resets the game&#39;s self.cards attribute to a new shuffled deck.</span>
+<span class="sd">        The method is called should the game&#39;s deck reach a length of 0.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Game.deal"><a class="viewcode-back" href="../Game.html#Game.Game.deal">[docs]</a>    <span class="k">def</span> <span class="nf">deal</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The deal method is called at the start of the game and sends 2 cards to each player in the game.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">deal_array</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_all_players</span><span class="p">()</span>
+        <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">2</span><span class="p">):</span> <span class="c1">#deal 2 cards to every player</span>
+            <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">deal_array</span><span class="p">:</span>
+                <span class="c1">#If the deck is emptied, use a new deck </span>
+                <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+                    <span class="bp">self</span><span class="o">.</span><span class="n">new_deck</span><span class="p">()</span>
+
+                <span class="n">card</span> <span class="o">=</span> <span class="bp">self</span><span class="o">.</span><span class="n">cards</span><span class="o">.</span><span class="n">pop</span><span class="p">(</span><span class="mi">0</span><span class="p">)</span>
+                <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">add_card</span><span class="p">(</span><span class="n">card</span><span class="p">)</span></div>
+
+<div class="viewcode-block" id="Game.give_info_to_player"><a class="viewcode-back" href="../Game.html#Game.Game.give_info_to_player">[docs]</a>    <span class="k">def</span> <span class="nf">give_info_to_player</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">player</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An instance method called at the beginning of every player&#39;s turn to provide the player with necessary game info:</span>
+<span class="sd">        their hand and the hands of their competitors.</span>
+
+<span class="sd">        :param player: the player whose current turn it is</span>
+<span class="sd">        :type player: class:`player`</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">internal_hand</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">print_hand</span><span class="p">()</span> <span class="c1">#The player&#39;s hand</span>
+ 
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;########## Player: </span><span class="si">{</span><span class="n">player</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> (</span><span class="si">{</span><span class="n">player</span><span class="o">.</span><span class="n">type</span><span class="si">}</span><span class="s2">) TURN ##########</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="k">if</span> <span class="n">player</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dealer</span><span class="p">:</span> <span class="c1">#The dealer flips over their facedown card</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The dealer flips their facedown card - their cards are </span><span class="si">{</span><span class="n">internal_hand</span><span class="si">}</span><span class="s2"> and has </span><span class="si">{</span><span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2"> points.&quot;</span><span class="p">)</span>
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Your cards are </span><span class="si">{</span><span class="n">internal_hand</span><span class="si">}</span><span class="s2">, you have </span><span class="si">{</span><span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">score</span><span class="si">}</span><span class="s2"> points. Cross 21, you bust!</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;The table looks like this:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>    
+        <span class="k">for</span> <span class="n">other_player</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_all_players</span><span class="p">():</span> <span class="c1">#print competitor hands</span>
+            <span class="k">if</span> <span class="n">other_player</span> <span class="o">==</span> <span class="bp">self</span><span class="o">.</span><span class="n">dealer</span><span class="p">:</span>
+                <span class="n">other_player_hand</span> <span class="o">=</span> <span class="n">other_player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">print_hand</span><span class="p">(</span><span class="n">dealer_external</span><span class="o">=</span><span class="kc">True</span><span class="p">)</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="n">other_player_hand</span> <span class="o">=</span> <span class="n">other_player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">print_hand</span><span class="p">(</span><span class="n">dealer_external</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">other_player</span> <span class="o">==</span> <span class="n">player</span><span class="p">:</span> <span class="c1">#don&#39;t reprint the current player&#39;s hand</span>
+                <span class="k">continue</span>
+
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* </span><span class="si">{</span><span class="n">other_player</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> * </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="k">if</span> <span class="n">other_player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">bust</span> <span class="o">==</span> <span class="kc">True</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">other_player</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has busted with cards </span><span class="si">{</span><span class="n">other_player_hand</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">continue</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">other_player</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> has not busted. Their cards are </span><span class="si">{</span><span class="n">other_player_hand</span><span class="si">}</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span></div>
+
+
+<div class="viewcode-block" id="Game.declare_winner"><a class="viewcode-back" href="../Game.html#Game.Game.declare_winner">[docs]</a>    <span class="k">def</span> <span class="nf">declare_winner</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An instance method called at the end of every round that determines the winner and updates the class:`Leaderboard` attribute.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="n">players_not_bust</span> <span class="o">=</span> <span class="nb">list</span><span class="p">(</span><span class="nb">filter</span><span class="p">(</span><span class="k">lambda</span> <span class="n">player</span><span class="p">:</span> <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">bust</span> <span class="o">==</span> <span class="kc">False</span><span class="p">,</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_all_players</span><span class="p">()))</span>
+        <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">players_not_bust</span><span class="p">)</span> <span class="o">==</span> <span class="mi">0</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;This round has no winners&quot;</span><span class="p">)</span>
+            <span class="k">return</span>
+        <span class="k">else</span><span class="p">:</span> <span class="c1">#if there is a winner(s), determine the max score (of those not busted)</span>
+            <span class="n">max_score</span> <span class="o">=</span> <span class="mi">0</span>
+            <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players_not_bust</span><span class="p">:</span>
+                <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">score</span> <span class="o">&gt;</span> <span class="n">max_score</span><span class="p">:</span>
+                    <span class="n">max_score</span> <span class="o">=</span> <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">score</span>
+            <span class="n">winners</span> <span class="o">=</span> <span class="p">[]</span>
+            <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="n">players_not_bust</span><span class="p">:</span> <span class="c1">#find all players with max score</span>
+                <span class="k">if</span> <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">score</span> <span class="o">==</span> <span class="n">max_score</span><span class="p">:</span>
+                    <span class="n">winners</span><span class="o">.</span><span class="n">append</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+
+            <span class="k">if</span> <span class="nb">len</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span> <span class="o">==</span> <span class="mi">1</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;The winner of this round is </span><span class="si">{</span><span class="n">winners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> with </span><span class="si">{</span><span class="n">max_score</span><span class="si">}</span><span class="s2"> points</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="n">winners</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#increment wins for winnters</span>
+
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;There are </span><span class="si">{</span><span class="nb">len</span><span class="p">(</span><span class="n">winners</span><span class="p">)</span><span class="si">}</span><span class="s2"> winners of this round with </span><span class="si">{</span><span class="n">max_score</span><span class="si">}</span><span class="s2"> points! They are:</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+                <span class="k">for</span> <span class="n">winner</span> <span class="ow">in</span> <span class="n">winners</span><span class="p">:</span>
+                    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;* </span><span class="si">{</span><span class="n">winner</span><span class="o">.</span><span class="n">name</span><span class="si">}</span><span class="s2"> *&quot;</span><span class="p">)</span>
+                    <span class="n">winner</span><span class="o">.</span><span class="n">wins</span> <span class="o">+=</span> <span class="mi">1</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">round_count</span> <span class="o">+=</span> <span class="mi">1</span> <span class="c1">#increment round_count</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">update_standings</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">print_leaderboard</span><span class="p">()</span></div>
+
+<div class="viewcode-block" id="Game.reset_game"><a class="viewcode-back" href="../Game.html#Game.Game.reset_game">[docs]</a>    <span class="k">def</span> <span class="nf">reset_game</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;An instance method called at the end of every round that takes all player cards and sets up a fresh deck.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">]</span>
+        <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_all_players</span><span class="p">():</span>
+            <span class="n">player</span><span class="o">.</span><span class="n">hand</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[]</span></div>
+
+
+<div class="viewcode-block" id="Game.play"><a class="viewcode-back" href="../Game.html#Game.Game.play">[docs]</a>    <span class="k">def</span> <span class="nf">play</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="sd">&quot;&quot;&quot;The play method is called in the executable file blackjack.py. It shuffles the deck, and deals cards, then has </span>
+<span class="sd">        every player play their round before declaring a winner and printing the current leaderboard standings. </span>
+<span class="sd">        The method then prompts the admin human user if they would like to play another round.</span>
+<span class="sd">        &quot;&quot;&quot;</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">shuffle</span><span class="p">()</span>
+        <span class="bp">self</span><span class="o">.</span><span class="n">deal</span><span class="p">()</span>
+        
+        <span class="k">for</span> <span class="n">player</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">list_all_players</span><span class="p">():</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">give_info_to_player</span><span class="p">(</span><span class="n">player</span><span class="p">)</span>
+            <span class="n">player</span><span class="o">.</span><span class="n">play_round</span><span class="p">(</span><span class="bp">self</span><span class="p">)</span>
+        
+        <span class="bp">self</span><span class="o">.</span><span class="n">declare_winner</span><span class="p">()</span>
+
+        <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
+            <span class="n">play_another_round</span> <span class="o">=</span> <span class="nb">input</span><span class="p">(</span><span class="s1">&#39;That was fun! Would you like to play another round [Yes / No]?&#39;</span><span class="p">)</span><span class="o">.</span><span class="n">lower</span><span class="p">()</span>
+            <span class="k">if</span> <span class="n">play_another_round</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span> <span class="ow">or</span> <span class="n">play_another_round</span> <span class="o">==</span> <span class="s1">&#39;no&#39;</span><span class="p">:</span>
+                <span class="k">break</span>
+            <span class="k">else</span><span class="p">:</span>
+                <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;You must answer &#39;Yes&#39; or &#39;No&#39;!&quot;</span><span class="p">)</span>
+        
+        <span class="k">if</span> <span class="n">play_another_round</span> <span class="o">==</span> <span class="s1">&#39;yes&#39;</span><span class="p">:</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">reset_game</span><span class="p">()</span> <span class="c1">#reset the deck and hands</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">play</span><span class="p">()</span> <span class="c1">#recursively call play_game</span>
+        
+        <span class="k">else</span><span class="p">:</span>
+            <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It was great playing with you! Here are the final standings: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">print_leaderboard</span><span class="p">()</span></div></div>
+
+
+
+</pre></div>
+
+           </div>
+          </div>
+          <footer>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>&#169; Copyright 2021, Leon Vortmeyer.</p>
+  </div>
+
+  Built with <a href="https://www.sphinx-doc.org/">Sphinx</a> using a
+    <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a>
+    provided by <a href="https://readthedocs.org">Read the Docs</a>.
+   
+
+</footer>
+        </div>
+      </div>
+    </section>
+  </div>
+  <script>
+      jQuery(function () {
+          SphinxRtdTheme.Navigation.enable(true);
+      });
+  </script> 
+
+</body>
+</html>

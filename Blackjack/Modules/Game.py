@@ -1,10 +1,10 @@
 #Leon Vortmeyer 10.31.2021
 
-from Modules.Card import Card
-from Modules.Computer import Computer
-from Modules.Dealer import Dealer
-from Modules.Human import Human
-from Modules.Leaderboard import Leaderboard
+from Card import Card
+from Computer import Computer
+from Dealer import Dealer
+from Human import Human
+from Leaderboard import Leaderboard
 from random import randint
 
 
@@ -164,7 +164,7 @@ class Game:
 
 
     def declare_winner(self):
-        """An instance method called at the end of every round that determines the winner and updates the leaderboard.
+        """An instance method called at the end of every round that determines the winner and updates the class:`Leaderboard` attribute.
         """
         players_not_bust = list(filter(lambda player: player.hand.bust == False, self.list_all_players()))
         if len(players_not_bust) == 0:

@@ -1,5 +1,5 @@
-Modules
-=======
+Blackjack
+=========
 
 .. toctree::
    :maxdepth: 4

@@ -8,13 +8,15 @@ class Computer(Player):
     :param id: the id of the integer passed to the computer player
     :type id: Integer
     
+    :ivar type: string set to "Computer"
+
     :return: Returns a new instance of the Computer
     :rtype: :class`Computer`
     """
 
 
     def __init__(self, id):
-        super().__init__(id, f"Computer {id}")
+        super().__init__(id, f"Computer {id}") #Calls player constructor
         self.type = 'Computer'
 
         

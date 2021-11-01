@@ -5,12 +5,14 @@ from Player import Player
 class Dealer(Player):
     """The Dealer class inherits from the class:`Player` abstract base class.
     
+    :ivar type: string set to "Computer"
+
     :return: Returns a new instance of the Dealer
     :rtype: :class`Dealer`
     """
     
     def __init__(self):
-        super().__init__(0, "Dealer")
+        super().__init__(0, "Dealer") #calls Player constructor
         self.type = 'Dealer'
 
 

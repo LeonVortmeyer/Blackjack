@@ -78,6 +78,12 @@
 <span class="sd">    :type human_player_count: Integer</span>
 <span class="sd">    :param computer_player_count: the number of human players with which to instantiate the game, defaults to 1</span>
 <span class="sd">    :type computer_player_count: Integer</span>
+
+<span class="sd">    :ivar cards: An array of class:`Card` objects that at instantiation represent the full 52 cards in a standard deck</span>
+<span class="sd">    :ivar human_players: An array of class:`Human` objects representing all human players</span>
+<span class="sd">    :ivar computer_players: An array of class:`Computer` objects representing all computer players</span>
+<span class="sd">    :ivar leaderboard: An class:`Leaderboard` object with all players (including dealer)</span>
+
 <span class="sd">    </span>
 <span class="sd">    :return: Returns a new instance of the game class with an unshuffled deck and empty leaderboard</span>
 <span class="sd">    :rtype: :class`Game`</span>
@@ -88,6 +94,15 @@
     <span class="n">dealer</span> <span class="o">=</span> <span class="n">Dealer</span><span class="p">()</span> <span class="c1">#Instantiates the dealer</span>
 
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">human_player_count</span><span class="o">=</span><span class="mi">1</span><span class="p">,</span> <span class="n">computer_player_count</span><span class="o">=</span><span class="mi">1</span><span class="p">):</span>
+
+        <span class="bp">self</span><span class="o">.</span><span class="n">print_intro</span><span class="p">()</span>
+
+        <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;&quot;&quot;</span><span class="se">\n</span><span class="s2">Welcome to terminal Blackjack! In just a moment you&#39;ll be on your way.</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        You initiated a game with </span><span class="si">{</span><span class="n">human_player_count</span><span class="si">}</span><span class="s2"> human player(s) and </span><span class="si">{</span><span class="n">computer_player_count</span><span class="si">}</span><span class="s2"> computer player(s).</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        Please now name your human players:</span><span class="se">\n</span><span class="s2"></span>
+<span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
+        
+        <span class="c1">#Instance attributes</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">cards</span> <span class="o">=</span> <span class="p">[</span><span class="n">Card</span><span class="p">(</span><span class="n">value</span> <span class="o">+</span> <span class="s1">&#39;-&#39;</span> <span class="o">+</span> <span class="n">suit</span><span class="p">)</span> <span class="k">for</span> <span class="n">suit</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">suits</span> <span class="k">for</span> <span class="n">value</span> <span class="ow">in</span> <span class="bp">self</span><span class="o">.</span><span class="n">values</span><span class="p">]</span> <span class="c1">#creates an unshuffled deck</span>
         
         <span class="n">human_players</span> <span class="o">=</span> <span class="p">[]</span>
@@ -103,7 +118,7 @@
         <span class="bp">self</span><span class="o">.</span><span class="n">human_players</span> <span class="o">=</span> <span class="n">human_players</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">computer_players</span> <span class="o">=</span> <span class="n">computer_players</span> 
         <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span> <span class="o">=</span> <span class="n">Leaderboard</span><span class="p">(</span><span class="n">human_players</span> <span class="o">+</span> <span class="n">computer_players</span> <span class="o">+</span> <span class="p">[</span><span class="bp">self</span><span class="o">.</span><span class="n">dealer</span><span class="p">])</span> <span class="c1">#create leaderboard</span>
-    
+
 
 <div class="viewcode-block" id="Game.start_game"><a class="viewcode-back" href="../Game.html#Game.Game.start_game">[docs]</a>    <span class="nd">@classmethod</span>
     <span class="k">def</span> <span class="nf">start_game</span><span class="p">(</span><span class="bp">cls</span><span class="p">):</span>
@@ -114,13 +129,7 @@
 <span class="sd">        :rtype: :class`Game`</span>
 <span class="sd">        &quot;&quot;&quot;</span>
 
-        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
-<span class="s2">██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗░░░░░██╗░█████╗░░█████╗░██╗░░██╗</span>
-<span class="s2">██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝░░░░░██║██╔══██╗██╔══██╗██║░██╔╝</span>
-<span class="s2">██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░░░░░░██║███████║██║░░╚═╝█████═╝░</span>
-<span class="s2">██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░██╗░░██║██╔══██║██║░░██╗██╔═██╗░</span>
-<span class="s2">██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗╚█████╔╝██║░░██║╚█████╔╝██║░╚██╗</span>
-<span class="s2">╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝&quot;&quot;&quot;</span><span class="p">)</span>
+        <span class="bp">cls</span><span class="o">.</span><span class="n">print_intro</span><span class="p">()</span>
 
         <span class="c1">#Word art sourced from https://fsymbols.com/text-art/</span>
 
@@ -128,8 +137,7 @@
 <span class="s2">        Before we start the game, we&#39;ll need to know how many people are playing...</span><span class="se">\n</span><span class="s2"></span>
 <span class="s2">        Let us know the number of human players you have (1 to 5) and computer players you&#39;d like to play with (1 to 5)!</span><span class="se">\n</span><span class="s2"></span>
 <span class="s2">        &quot;&quot;&quot;</span><span class="p">)</span>
-        
-
+       
         <span class="k">while</span> <span class="kc">True</span><span class="p">:</span>
             <span class="k">try</span><span class="p">:</span>
                 <span class="n">human_count</span> <span class="o">=</span> <span class="nb">int</span><span class="p">(</span><span class="nb">input</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;How many human players?</span><span class="se">\t</span><span class="s2">&quot;</span><span class="p">))</span> <span class="c1">#Prompt user for human players</span>
@@ -291,9 +299,18 @@
         
         <span class="k">else</span><span class="p">:</span>
             <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;It was great playing with you! Here are the final standings: </span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
-            <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">print_leaderboard</span><span class="p">()</span></div></div>
+            <span class="bp">self</span><span class="o">.</span><span class="n">leaderboard</span><span class="o">.</span><span class="n">print_leaderboard</span><span class="p">()</span></div>
 
+<div class="viewcode-block" id="Game.print_intro"><a class="viewcode-back" href="../Game.html#Game.Game.print_intro">[docs]</a>    <span class="k">def</span> <span class="nf">print_intro</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>
+        <span class="nb">print</span><span class="p">(</span><span class="s2">&quot;&quot;&quot;</span>
+<span class="s2">██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗░░░░░██╗░█████╗░░█████╗░██╗░░██╗</span>
+<span class="s2">██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝░░░░░██║██╔══██╗██╔══██╗██║░██╔╝</span>
+<span class="s2">██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░░░░░░██║███████║██║░░╚═╝█████═╝░</span>
+<span class="s2">██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░██╗░░██║██╔══██║██║░░██╗██╔═██╗░</span>
+<span class="s2">██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗╚█████╔╝██║░░██║╚█████╔╝██║░╚██╗</span>
+<span class="s2">╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝&quot;&quot;&quot;</span><span class="p">)</span></div></div>
 
+        <span class="c1">#Word art sourced from https://fsymbols.com/text-art/</span>
 
 </pre></div>
 

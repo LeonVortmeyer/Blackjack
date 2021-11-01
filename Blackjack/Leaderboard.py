@@ -4,8 +4,11 @@ class Leaderboard:
     :param players: a list of players from whom to construct the leaderboard
     :type players: [class:`Player`]
 
-    :return: Returns a new instance of the Dealer
-    :rtype: :class`Dealer`
+    :ivar entires: a list of tuples (class:`Player1, integer), where integer represents wins
+    :ivar round_count: integer tracking the number of rounds played
+
+    :return: Returns a new instance of the Leaderboard
+    :rtype: :class`Leaderboard`
     """
     
     def __init__(self, players):

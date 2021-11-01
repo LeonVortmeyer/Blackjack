@@ -73,6 +73,8 @@
 
 <span class="sd">    :param name: the id of the integer passed to the human player</span>
 <span class="sd">    :type name: string</span>
+
+<span class="sd">    :ivar type: set equal to &#39;Human&#39; (string)</span>
 <span class="sd">    </span>
 <span class="sd">    </span>
 <span class="sd">    :return: Returns a new instance of Human</span>
@@ -80,7 +82,7 @@
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">):</span>
-        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span>
+        <span class="nb">super</span><span class="p">()</span><span class="o">.</span><span class="fm">__init__</span><span class="p">(</span><span class="nb">id</span><span class="p">,</span> <span class="n">name</span><span class="p">)</span> <span class="c1">#Calls player constructor</span>
         <span class="bp">self</span><span class="o">.</span><span class="n">type</span> <span class="o">=</span> <span class="s1">&#39;Human&#39;</span>
 
 <div class="viewcode-block" id="Human.think"><a class="viewcode-back" href="../Human.html#Human.Human.think">[docs]</a>    <span class="k">def</span> <span class="nf">think</span><span class="p">(</span><span class="bp">self</span><span class="p">):</span>

@@ -77,11 +77,19 @@
 <li><p><strong>computer_player_count</strong> (<em>Integer</em>) – the number of human players with which to instantiate the game, defaults to 1</p></li>
 </ul>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a new instance of the game class with an unshuffled deck and empty leaderboard</p>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>cards</strong> – An array of class:<cite>Card</cite> objects that at instantiation represent the full 52 cards in a standard deck</p></li>
+<li><p><strong>human_players</strong> – An array of class:<cite>Human</cite> objects representing all human players</p></li>
+<li><p><strong>computer_players</strong> – An array of class:<cite>Computer</cite> objects representing all computer players</p></li>
+<li><p><strong>leaderboard</strong> – An class:<cite>Leaderboard</cite> object with all players (including dealer)</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>:class`Game`</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a new instance of the game class with an unshuffled deck and empty leaderboard</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>:class`Game`</p>
 </dd>
 </dl>
 <dl class="py method">
@@ -135,6 +143,11 @@ The method is called should the game’s deck reach a length of 0.</p>
 every player play their round before declaring a winner and printing the current leaderboard standings. 
 The method then prompts the admin human user if they would like to play another round.</p>
 </dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="Game.Game.print_intro">
+<span class="sig-name descname"><span class="pre">print_intro</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="reference internal" href="_modules/Game.html#Game.print_intro"><span class="viewcode-link"><span class="pre">[source]</span></span></a><a class="headerlink" href="#Game.Game.print_intro" title="Permalink to this definition"></a></dt>
+<dd></dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="Game.Game.reset_game">

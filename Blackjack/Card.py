@@ -6,6 +6,11 @@ class Card:
 
     :param card_string: the card specification from the suits and values defined in suits and values lists
     :type card_string: String
+
+    :ivar string: set equal to the card_string param
+    :ivar rank: string set equal to the card rank 
+    :ivar suit: a string set equal to the card suit
+    :ivar value: integer or dict (dict if rank = "A") representing the card value
     
     :return: Returns a card instance from the card_string
     :rtype: :class`Card`

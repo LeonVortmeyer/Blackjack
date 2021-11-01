@@ -8,6 +8,10 @@ class Hand:
     :param cards: A list of card objects or [], defaults to []
     :type cards: [`class`:Card]
 
+    :ivar cards: set equal to cards parameter
+    :ivar score: Integer represnting the hand's current score
+    :ivar bust: boolean representing the hand's current bust status
+
     :return: Returns a new instance of Hand
     :rtype: :class`Hand`
     """

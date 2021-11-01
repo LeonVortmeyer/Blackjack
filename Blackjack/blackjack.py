@@ -12,11 +12,11 @@ if __name__ == "__main__":
     
 
     #A game may also be started with the .__init__() (Game()) method, which defaults to 1 human player, 1 computer player,
-    #and the dealer. But we recommend playing with game.start_game()
+    #and the dealer. But we recommend playing with Game.start_game()
 
     
-    #newgame = Game()
+    #newgame = Game.start_game()
 
-    newgame = Game.start_game()
+    newgame = Game()
     newgame.play()
 

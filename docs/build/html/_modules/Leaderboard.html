@@ -67,8 +67,11 @@
 <span class="sd">    :param players: a list of players from whom to construct the leaderboard</span>
 <span class="sd">    :type players: [class:`Player`]</span>
 
-<span class="sd">    :return: Returns a new instance of the Dealer</span>
-<span class="sd">    :rtype: :class`Dealer`</span>
+<span class="sd">    :ivar entires: a list of tuples (class:`Player1, integer), where integer represents wins</span>
+<span class="sd">    :ivar round_count: integer tracking the number of rounds played</span>
+
+<span class="sd">    :return: Returns a new instance of the Leaderboard</span>
+<span class="sd">    :rtype: :class`Leaderboard`</span>
 <span class="sd">    &quot;&quot;&quot;</span>
     
     <span class="k">def</span> <span class="fm">__init__</span><span class="p">(</span><span class="bp">self</span><span class="p">,</span> <span class="n">players</span><span class="p">):</span>

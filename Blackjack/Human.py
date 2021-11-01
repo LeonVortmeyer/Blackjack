@@ -10,6 +10,8 @@ class Human(Player):
 
     :param name: the id of the integer passed to the human player
     :type name: string
+
+    :ivar type: set equal to 'Human' (string)
     
     
     :return: Returns a new instance of Human
@@ -17,7 +19,7 @@ class Human(Player):
     """
     
     def __init__(self, id, name):
-        super().__init__(id, name)
+        super().__init__(id, name) #Calls player constructor
         self.type = 'Human'
 
     def think(self):

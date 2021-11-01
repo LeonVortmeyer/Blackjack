@@ -75,11 +75,19 @@ string inputs like ‘A-H’, ‘10-C’, etc</p>
 <dt class="field-odd">Parameters</dt>
 <dd class="field-odd"><p><strong>card_string</strong> (<em>String</em>) – the card specification from the suits and values defined in suits and values lists</p>
 </dd>
-<dt class="field-even">Returns</dt>
-<dd class="field-even"><p>Returns a card instance from the card_string</p>
+<dt class="field-even">Variables</dt>
+<dd class="field-even"><ul class="simple">
+<li><p><strong>string</strong> – set equal to the card_string param</p></li>
+<li><p><strong>rank</strong> – string set equal to the card rank</p></li>
+<li><p><strong>suit</strong> – a string set equal to the card suit</p></li>
+<li><p><strong>value</strong> – integer or dict (dict if rank = “A”) representing the card value</p></li>
+</ul>
 </dd>
-<dt class="field-odd">Return type</dt>
-<dd class="field-odd"><p>:class`Card`</p>
+<dt class="field-odd">Returns</dt>
+<dd class="field-odd"><p>Returns a card instance from the card_string</p>
+</dd>
+<dt class="field-even">Return type</dt>
+<dd class="field-even"><p>:class`Card`</p>
 </dd>
 </dl>
 <dl class="py attribute">

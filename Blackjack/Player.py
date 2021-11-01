@@ -13,6 +13,11 @@ class Player(ABC):
     :param name: the name of the player
     :type name: String
 
+    :ivar id: set equal to id param
+    :ivar name: set equal to name param
+    :ivar hand: the class:`Hand` object of the player, instantiated with []
+    :ivar wins: integer tracking the number of player wins, instantiated with 0
+
     :return: Returns a new instance of the Player
     :rtype: :class`Player`
     """

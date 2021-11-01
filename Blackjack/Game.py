@@ -15,6 +15,12 @@ class Game:
     :type human_player_count: Integer
     :param computer_player_count: the number of human players with which to instantiate the game, defaults to 1
     :type computer_player_count: Integer
+
+    :ivar cards: An array of class:`Card` objects that at instantiation represent the full 52 cards in a standard deck
+    :ivar human_players: An array of class:`Human` objects representing all human players
+    :ivar computer_players: An array of class:`Computer` objects representing all computer players
+    :ivar leaderboard: An class:`Leaderboard` object with all players (including dealer)
+
     
     :return: Returns a new instance of the game class with an unshuffled deck and empty leaderboard
     :rtype: :class`Game`
@@ -25,6 +31,15 @@ class Game:
     dealer = Dealer() #Instantiates the dealer
 
     def __init__(self, human_player_count=1, computer_player_count=1):
+
+        self.print_intro()
+
+        print(f"""\nWelcome to terminal Blackjack! In just a moment you'll be on your way.\n
+        You initiated a game with {human_player_count} human player(s) and {computer_player_count} computer player(s).\n
+        Please now name your human players:\n
+        """)
+        
+        #Instance attributes
         self.cards = [Card(value + '-' + suit) for suit in self.suits for value in self.values] #creates an unshuffled deck
         
         human_players = []
@@ -40,7 +55,7 @@ class Game:
         self.human_players = human_players 
         self.computer_players = computer_players 
         self.leaderboard = Leaderboard(human_players + computer_players + [self.dealer]) #create leaderboard
-    
+
 
     @classmethod
     def start_game(cls):
@@ -51,13 +66,7 @@ class Game:
         :rtype: :class`Game`
         """
 
-        print("""
-██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗░░░░░██╗░█████╗░░█████╗░██╗░░██╗
-██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝░░░░░██║██╔══██╗██╔══██╗██║░██╔╝
-██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░░░░░░██║███████║██║░░╚═╝█████═╝░
-██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░██╗░░██║██╔══██║██║░░██╗██╔═██╗░
-██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗╚█████╔╝██║░░██║╚█████╔╝██║░╚██╗
-╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝""")
+        cls.print_intro()
 
         #Word art sourced from https://fsymbols.com/text-art/
 
@@ -65,8 +74,7 @@ class Game:
         Before we start the game, we'll need to know how many people are playing...\n
         Let us know the number of human players you have (1 to 5) and computer players you'd like to play with (1 to 5)!\n
         """)
-        
-
+       
         while True:
             try:
                 human_count = int(input(f"How many human players?\t")) #Prompt user for human players
@@ -230,5 +238,14 @@ class Game:
             print("It was great playing with you! Here are the final standings: \n")
             self.leaderboard.print_leaderboard()
 
+    def print_intro(self):
+        print("""
+██████╗░██╗░░░░░░█████╗░░█████╗░██╗░░██╗░░░░░██╗░█████╗░░█████╗░██╗░░██╗
+██╔══██╗██║░░░░░██╔══██╗██╔══██╗██║░██╔╝░░░░░██║██╔══██╗██╔══██╗██║░██╔╝
+██████╦╝██║░░░░░███████║██║░░╚═╝█████═╝░░░░░░██║███████║██║░░╚═╝█████═╝░
+██╔══██╗██║░░░░░██╔══██║██║░░██╗██╔═██╗░██╗░░██║██╔══██║██║░░██╗██╔═██╗░
+██████╦╝███████╗██║░░██║╚█████╔╝██║░╚██╗╚█████╔╝██║░░██║╚█████╔╝██║░╚██╗
+╚═════╝░╚══════╝╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝░╚════╝░╚═╝░░╚═╝""")
 
+        #Word art sourced from https://fsymbols.com/text-art/
 
